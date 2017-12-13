@@ -3,21 +3,88 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Scores and Schedule</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  <ion-slides pager="true" dir="{{dir}}">
+    <ion-slide *ngFor="let slide of slides">
+      <h3>Group {{ slide.grupa }}</h3>
+      <ion-list>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+         <!-- {{item.title}}
+          <div class="item-note" item-end>
+            {{item.note}}
+          </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+          <!-- {{item.title}}
+           <div class="item-note" item-end>
+             {{item.note}}
+           </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+          <!-- {{item.title}}
+           <div class="item-note" item-end>
+             {{item.note}}
+           </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+          <!-- {{item.title}}
+           <div class="item-note" item-end>
+             {{item.note}}
+           </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+          <!-- {{item.title}}
+           <div class="item-note" item-end>
+             {{item.note}}
+           </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+          <!-- {{item.title}}
+           <div class="item-note" item-end>
+             {{item.note}}
+           </div>-->
+          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
+          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">South Korea</div>
+          <div style="float:left;width:8%;text-align:center;">- : -</div>
+          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
+        </button>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
