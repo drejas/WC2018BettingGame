@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -10,8 +11,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {GroupStagePage} from "../pages/group-stage/group-stage";
 import {WelcomePage} from "../pages/welcome/welcome";
-import {SignupPage} from "../pages/signup/signup";
-import {LoginPage} from "../pages/login/login";
+import { User } from '../providers/providers';
+import { Api } from '../providers/providers';
+import { Games } from '../providers/providers';
+import {IonicStorageModule} from '@ionic/Storage';
+import { ScreenOrientation } from '@ionic-native/Screen-orientation';
 
 @NgModule({
   declarations: [
@@ -20,12 +24,12 @@ import {LoginPage} from "../pages/login/login";
     ListPage,
     GroupStagePage,
     WelcomePage,
-    SignupPage,
-    LoginPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,12 +38,14 @@ import {LoginPage} from "../pages/login/login";
     ListPage,
     GroupStagePage,
     WelcomePage,
-    LoginPage,
-    SignupPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    User,
+    Api,
+    Games,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -9,81 +9,202 @@
 
 <ion-content>
   <ion-slides pager="true" dir="{{dir}}">
-    <ion-slide *ngFor="let slide of slides">
-      <h3>Group {{ slide.grupa }}</h3>
+    <ion-slide *ngFor="let slide of slides; let i = index">
+      <h3 *ngIf="i<8">Group {{ slide.grupa }}</h3>
+      <h3 *ngIf="(i==8)">Round of 16</h3>
+      <h3 *ngIf="(i==9)">Quarterfinals</h3>
+      <h3 *ngIf="(i==10)">Semifinals</h3>
+      <h3 *ngIf="(i==11)">3rd Place</h3>
+      <h3 *ngIf="(i==12)">Final</h3>
       <ion-list>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-         <!-- {{item.title}}
-          <div class="item-note" item-end>
-            {{item.note}}
-          </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-          <!-- {{item.title}}
-           <div class="item-note" item-end>
-             {{item.note}}
-           </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-          <!-- {{item.title}}
-           <div class="item-note" item-end>
-             {{item.note}}
-           </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-          <!-- {{item.title}}
-           <div class="item-note" item-end>
-             {{item.note}}
-           </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-          <!-- {{item.title}}
-           <div class="item-note" item-end>
-             {{item.note}}
-           </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
-        <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
-          <!-- {{item.title}}
-           <div class="item-note" item-end>
-             {{item.note}}
-           </div>-->
-          <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">14-06-2018<br>16:00</div>
-          <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/sk.png"/></div>
-          <div style="float:left;width:28%;text-align:left;">South Korea</div>
-          <div style="float:left;width:8%;text-align:center;">- : -</div>
-          <div style="float:left;width:28%;text-align:right;">Saudi Arabia</div>
-          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/sa.png"/></div>
-        </button>
+        <div *ngIf="i<8">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g2_data }}<br>{{ slide.g2_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g2_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g2_A_score }} : {{ slide.g2_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g2_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g2_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g3_data }}<br>{{ slide.g3_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g3_A_flag }}.png"/></div>
+          <div style="float:left;width:28%;text-align:left;">{{ slide.g3_A }}</div>
+          <div style="float:left;width:8%;text-align:center;">{{ slide.g3_A_score }} : {{ slide.g3_B_score }}</div>
+          <div style="float:left;width:28%;text-align:right;">{{ slide.g3_B }}</div>
+          <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g3_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g4_data }}<br>{{ slide.g4_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g4_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g4_A_score }} : {{ slide.g4_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g4_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g4_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g5_data }}<br>{{ slide.g5_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g5_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g5_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g5_A_score }} : {{ slide.g5_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g5_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g5_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g6_data }}<br>{{ slide.g6_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g6_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g6_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g6_A_score }} : {{ slide.g6_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g6_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g6_B_flag }}.png"/></div>
+          </button>
+        </div>
+        <div *ngIf="i==8">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g2_data }}<br>{{ slide.g2_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g2_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g2_A_score }} : {{ slide.g2_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g2_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g2_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g3_data }}<br>{{ slide.g3_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g3_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g3_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g3_A_score }} : {{ slide.g3_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g3_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g3_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g4_data }}<br>{{ slide.g4_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g4_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g4_A_score }} : {{ slide.g4_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g4_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g4_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g5_data }}<br>{{ slide.g5_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g5_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g5_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g5_A_score }} : {{ slide.g5_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g5_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g5_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g6_data }}<br>{{ slide.g6_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g6_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g6_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g6_A_score }} : {{ slide.g6_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g6_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g6_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g7_data }}<br>{{ slide.g7_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g7_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g7_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g7_A_score }} : {{ slide.g7_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g7_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g7_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g8_data }}<br>{{ slide.g8_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g8_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g8_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g8_A_score }} : {{ slide.g8_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g8_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g8_B_flag }}.png"/></div>
+          </button>
+        </div>
+        <div *ngIf="i==9">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g2_data }}<br>{{ slide.g2_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g2_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g2_A_score }} : {{ slide.g2_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g2_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g2_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g3_data }}<br>{{ slide.g3_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g3_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g3_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g3_A_score }} : {{ slide.g3_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g3_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g3_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g4_data }}<br>{{ slide.g4_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g4_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g4_A_score }} : {{ slide.g4_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g4_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g4_B_flag }}.png"/></div>
+          </button>
+        </div>
+        <div *ngIf="i==10">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g2_data }}<br>{{ slide.g2_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g2_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g2_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g2_A_score }} : {{ slide.g2_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g2_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g2_B_flag }}.png"/></div>
+          </button>
+        </div>
+        <div *ngIf="i==11">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+        </div>
+        <div *ngIf="i==12">
+          <button ion-item (click)="itemTapped($event, item)" style="padding-right:16px;">
+            <div style="float:left;width:18%;text-align:center;font-size:9px;padding-left:16px;">{{ slide.g1_data }}<br>{{ slide.g1_czas }}</div>
+            <div style="float:left;width:10%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.g1_A_flag }}.png"/></div>
+            <div style="float:left;width:28%;text-align:left;">{{ slide.g1_A }}</div>
+            <div style="float:left;width:8%;text-align:center;">{{ slide.g1_A_score }} : {{ slide.g1_B_score }}</div>
+            <div style="float:left;width:28%;text-align:right;">{{ slide.g1_B }}</div>
+            <div style="float:left;width:8%;text-align:right;"><img src="assets/imgs/flags/png/{{ slide.g1_B_flag }}.png"/></div>
+          </button>
+        </div>
       </ion-list>
     </ion-slide>
   </ion-slides>

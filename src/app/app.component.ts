@@ -25,7 +25,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Scores and Schedule', component: ListPage },
-      { title: 'Group Stage', component: GroupStagePage }
+      { title: 'Group Standings', component: GroupStagePage }
     ];
 
   }

@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Group Stage</ion-title>
+    <ion-title>Group Standings</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-slides pager="true" dir="{{dir}}">
     <ion-slide *ngFor="let slide of slides">
-      <h3>Group {{ slide.grupa }}</h3>
+      <h3>Group {{ slide.group1 }}</h3>
       <ion-list>
         <div ion-item style="width:100%;font-weight: bold;">
           <div style="float:left;width:2%;text-align:left;">#</div>
@@ -34,7 +34,7 @@
         <div ion-item style="width:100%">
           <div style="float:left;width:2%;text-align:left;">1</div>
           <div style="float:left;width:8%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.flaga1 }}.png"/></div>
-          <div style="float:left;width:29%;text-align:left;">{{ slide.miejsce1 }}</div>
+          <div style="float:left;width:29%;text-align:left;">{{ slide.m1 }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m1_mecze }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m1_W }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m1_D }}</div>
@@ -46,7 +46,7 @@
         <div ion-item style="width:100%">
           <div style="float:left;width:2%;text-align:left;">2</div>
           <div style="float:left;width:8%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.flaga2 }}.png"/></div>
-          <div style="float:left;width:29%;text-align:left;">{{ slide.miejsce2 }}</div>
+          <div style="float:left;width:29%;text-align:left;">{{ slide.m2 }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m2_mecze }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m2_W }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m2_D }}</div>
@@ -58,7 +58,7 @@
         <div ion-item style="width:100%">
           <div style="float:left;width:2%;text-align:left;">3</div>
           <div style="float:left;width:8%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.flaga3 }}.png"/></div>
-          <div style="float:left;width:29%;text-align:left;">{{ slide.miejsce3 }}</div>
+          <div style="float:left;width:29%;text-align:left;">{{ slide.m3 }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m3_mecze }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m3_W }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m3_D }}</div>
@@ -70,7 +70,7 @@
         <div ion-item style="width:100%">
           <div style="float:left;width:2%;text-align:left;">4</div>
           <div style="float:left;width:8%;text-align:center;"><img src="assets/imgs/flags/png/{{ slide.flaga4 }}.png"/></div>
-          <div style="float:left;width:29%;text-align:left;">{{ slide.miejsce4 }}</div>
+          <div style="float:left;width:29%;text-align:left;">{{ slide.m4 }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m4_mecze }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m4_W }}</div>
           <div style="float:left;width:8%;text-align:center;">{{ slide.m4_D }}</div>

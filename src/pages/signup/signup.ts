@@ -1,25 +1,78 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import {App, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
+import { Storage } from '@ionic/Storage';
 
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { User } from '../../providers/providers';
+import { HomePage } from "../home/home";
 
 @IonicPage()
 @Component({
   selector: 'page-signup',
-  templateUrl: 'signup.html',
+  templateUrl: 'signup.html'
 })
+
 export class SignupPage {
+  @ViewChild(Nav) nav: Nav;
+  // The account fields for the login form.
+  // If you're using the username field with or without email, make
+  // sure to add it to the type
+  account: { nickname: string, email: string, password: string } = {
+    nickname: '',
+    email: '',
+    password: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  // Toast text strings
+  private signupErrorString: string;
+  private signupSuccessString: string;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public user: User,
+              public toastCtrl: ToastController,
+              private app:App,
+              private storage: Storage) {
+
+      this.signupErrorString = "SignUp Error";
+      this.signupSuccessString = "SignUp Success!!!";
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
-  }
+  doSignup() {
+    // Attempt to login in through our User service
+    this.user.signup(this.account).subscribe((resp) => {
+      this.app.getRootNav().setRoot(HomePage);
 
+      if (resp['status'] == 'success') {
+        // Able to sign up
+        let toast = this.toastCtrl.create({
+          message: this.signupSuccessString,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+
+        this.storage.set('age', '31');
+
+        //this.storage.remove('age');
+
+        // Or to get a key/value pair
+        this.storage.get('age').then((val) => {
+          console.log('Your age is '+ val);
+        });
+      }
+    }, (err) => {
+
+      this.app.getRootNav().setRoot(HomePage);
+
+      // Unable to sign up
+      let toast = this.toastCtrl.create({
+        message: this.signupErrorString,
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+    });
+  }
 }
+

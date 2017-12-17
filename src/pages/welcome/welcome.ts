@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ScreenOrientation } from '@ionic-native/Screen-orientation';
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the WelcomePage page.
@@ -15,7 +17,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private screenOrientation: ScreenOrientation) {
+    //screenOrientation.lock(screenOrientation.ORIENTATIONS.PORTRAIT);
+    if(this.checkLogin()){
+      this.navCtrl.push('HomePage');
+    }
+  }
+
+  checkLogin() {
+
+    return true;
   }
 
   login() {
