@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import {App, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Nav, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
-
 import { User } from '../../providers/providers';
 import { HomePage } from "../home/home";
 
@@ -51,15 +50,6 @@ export class SignupPage {
           position: 'bottom'
         });
         toast.present();
-
-        this.storage.set('age', '31');
-
-        //this.storage.remove('age');
-
-        // Or to get a key/value pair
-        this.storage.get('age').then((val) => {
-          console.log('Your age is '+ val);
-        });
       }
     }, (err) => {
 

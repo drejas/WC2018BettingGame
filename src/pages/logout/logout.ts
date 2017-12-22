@@ -3,22 +3,21 @@ import { App, IonicPage, NavController, NavParams, ToastController } from 'ionic
 import { Storage } from '@ionic/Storage';
 import { User } from '../../providers/providers';
 import { HomePage } from '../home/home';
+import {WelcomePage} from "../welcome/welcome";
+
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+  selector: 'page-logout',
+  templateUrl: 'logout.html',
 })
-export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
+export class LogoutPage {
+  account: { email: string, password: string, id: string } = {
     email: '',
-    password: ''
+    password: '',
+    id: ''
   };
 
-  // Our translated text strings
   private loginErrorString: string;
   private loginSuccessString: string;
   private loginRejectString: string;
@@ -29,19 +28,20 @@ export class LoginPage {
               public toastCtrl: ToastController,
               private app:App, private storage: Storage) {
 
-      this.loginErrorString = "Login Error";
-      this.loginRejectString = "Login Reject";
-      this.loginSuccessString = "Login Success!!!";
+    this.loginErrorString = "Logout Error";
+    this.loginRejectString = "Logout Reject";
+    this.loginSuccessString = "Logout Success!!!";
+
+    this.doLogout();
   }
 
-  // Attempt to login in through our User service
-  doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.app.getRootNav().setRoot(HomePage);
+  doLogout() {
+    this.user.logout(this.account).subscribe((resp) => {
+      this.app.getRootNav().setRoot(WelcomePage);
       if (resp['status'] == 'success') {
-        this.storage.set('token', resp['token']);
-        this.storage.set('email', resp['email']);
-        this.storage.set('id', resp['id']);
+        this.storage.remove('token');
+        this.storage.remove('email');
+        this.storage.remove('id');
         // Able to sign up
         let toast = this.toastCtrl.create({
           message: this.loginSuccessString,
@@ -61,7 +61,7 @@ export class LoginPage {
       }
     }, (err) => {
       this.app.getRootNav().setRoot(HomePage);
-      // Unable to log in
+      // Unable to log out
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
@@ -70,4 +70,9 @@ export class LoginPage {
       toast.present();
     });
   }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LogoutPage');
+  }
+
 }
