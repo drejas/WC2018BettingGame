@@ -1,6 +1,6 @@
 {
   "name": "WC2018 Betting Game",
-  "app_id": "",
+  "app_id": "wc2018bet",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

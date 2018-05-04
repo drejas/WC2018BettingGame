@@ -9,5 +9,8 @@ import { GroupStagePage } from './group-stage';
   imports: [
     IonicPageModule.forChild(GroupStagePage),
   ],
+  exports: [
+    GroupStagePage,
+  ]
 })
 export class GroupStagePageModule {}

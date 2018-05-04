@@ -13,18 +13,19 @@ import { HomePage } from "../home/home";
 
 export class SignupPage {
   @ViewChild(Nav) nav: Nav;
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { nickname: string, email: string, password: string } = {
+
+  // login object
+  account: { nickname: string, email: string, password: string, password2: string } = {
     nickname: '',
     email: '',
-    password: ''
+    password: '',
+    password2: ''
   };
 
   // Toast text strings
   private signupErrorString: string;
   private signupSuccessString: string;
+  private signupRejectString: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -33,35 +34,52 @@ export class SignupPage {
               private app:App,
               private storage: Storage) {
 
-      this.signupErrorString = "SignUp Error";
-      this.signupSuccessString = "SignUp Success!!!";
+    this.signupErrorString = "SignUp Error";
+    this.signupRejectString = "SignUp Reject";
+    this.signupSuccessString = "SignUp Success. Please check your Email to finish Registration and then LogIn!";
   }
 
-  doSignup() {
-    // Attempt to login in through our User service
+  signup() {
+    // account data ready
+    console.log("SignUp request: ");
+    console.log(this.account);
     this.user.signup(this.account).subscribe((resp) => {
-      this.app.getRootNav().setRoot(HomePage);
-
       if (resp['status'] == 'success') {
-        // Able to sign up
+        console.log('SignUp status: success');
+        // toast success
         let toast = this.toastCtrl.create({
           message: this.signupSuccessString,
           duration: 3000,
           position: 'bottom'
         });
         toast.present();
+        // stay at WelcomePage
+      }
+      else{
+        console.log('SignUp status: '+resp['status']);
+        // clear login data
+        this.storage.remove('token');
+        this.storage.remove('email');
+        this.storage.remove('id');
+        // toast reject
+        let toast = this.toastCtrl.create({
+          message: this.signupRejectString,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+        // stay at WelcomePage
       }
     }, (err) => {
-
-      this.app.getRootNav().setRoot(HomePage);
-
-      // Unable to sign up
+      console.log('SignUp status: error');
+      // Toast error
       let toast = this.toastCtrl.create({
         message: this.signupErrorString,
         duration: 3000,
         position: 'bottom'
       });
       toast.present();
+      // stay at WelcomePage
     });
   }
 }

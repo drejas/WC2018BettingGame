@@ -40,4 +40,50 @@ export class Games {
     return seq;
   }
 
+  /**
+   * Send a POST request to add_bettingGame endpoint to add new BettingGame
+   */
+  add_bettingGame(gameData: any) {
+    let seq = this.api.post('wc_add_bettingGame.php', JSON.stringify(gameData)).share();
+
+    seq.subscribe((res: any) => {
+      console.log(res);
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  /**
+   * Send a POST request to get_bettingGames endpoint to get all users BettingGames
+   */
+  get_bettingGames(gameData: any) {
+    let seq = this.api.post('wc_get_bettingGames.php', JSON.stringify(gameData)).share();
+
+    seq.subscribe((res: any) => {
+      console.log(res);
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  /**
+   * Send a POST request to get_bettingGames endpoint to get all users BettingGames
+   */
+  get_gameStandings(gameData: any) {
+    let seq = this.api.post('wc_get_gameStandings.php', JSON.stringify(gameData)).share();
+
+    seq.subscribe((res: any) => {
+      console.log(res);
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+
 }

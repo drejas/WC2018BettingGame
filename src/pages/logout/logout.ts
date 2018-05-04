@@ -3,7 +3,7 @@ import { App, IonicPage, NavController, NavParams, ToastController } from 'ionic
 import { Storage } from '@ionic/Storage';
 import { User } from '../../providers/providers';
 import { HomePage } from '../home/home';
-import {WelcomePage} from "../welcome/welcome";
+import { WelcomePage } from '../welcome/welcome';
 
 
 @IonicPage()
@@ -12,13 +12,15 @@ import {WelcomePage} from "../welcome/welcome";
   templateUrl: 'logout.html',
 })
 export class LogoutPage {
-  account: { email: string, password: string, id: string } = {
+  account: { email: string, token: string, id: string } = {
     email: '',
-    password: '',
+    token: '',
     id: ''
   };
 
   private loginErrorString: string;
+  private jsonErrorString: string;
+  private dbFailureString: string;
   private loginSuccessString: string;
   private loginRejectString: string;
 
@@ -29,10 +31,15 @@ export class LogoutPage {
               private app:App, private storage: Storage) {
 
     this.loginErrorString = "Logout Error";
+    this.jsonErrorString = "Connection Error";
+    this.dbFailureString = "Database Error";
     this.loginRejectString = "Logout Reject";
-    this.loginSuccessString = "Logout Success!!!";
+    this.loginSuccessString = "Logout Success!";
 
-    this.doLogout();
+    this.setAccount().then( ()=> {
+      console.log(this.account);
+      this.doLogout();
+    });
   }
 
   doLogout() {
@@ -42,7 +49,7 @@ export class LogoutPage {
         this.storage.remove('token');
         this.storage.remove('email');
         this.storage.remove('id');
-        // Able to sign up
+        // Able to Logout
         let toast = this.toastCtrl.create({
           message: this.loginSuccessString,
           duration: 3000,
@@ -51,9 +58,27 @@ export class LogoutPage {
         toast.present();
       }
       else if (resp['status'] == 'reject') {
-        // Able to sign up
+        // Logout Reject - wrong Token?
         let toast = this.toastCtrl.create({
           message: this.loginRejectString,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
+      else if (resp['status'] == 'failure_db') {
+        // DB failure
+        let toast = this.toastCtrl.create({
+          message: this.dbFailureString,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
+      else{
+        // JSON Error
+        let toast = this.toastCtrl.create({
+          message: this.jsonErrorString,
           duration: 3000,
           position: 'bottom'
         });
@@ -65,10 +90,27 @@ export class LogoutPage {
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
       toast.present();
     });
+  }
+
+  // set Account fields
+  setAccount(){
+    let emailPromise = this.storage.get('email').then((val) => {
+      this.account.email = val;
+      console.log("Email: " + this.account.email);
+    });
+    let idPromise = this.storage.get('id').then((val) => {
+      this.account.id = val;
+      console.log("ID: " + this.account.id);
+    });
+    let tokenPromise = this.storage.get('token').then((val) => {
+      this.account.token = val;
+      console.log("Token: " + this.account.token);
+    });
+    return Promise.all([emailPromise, idPromise, tokenPromise]);
   }
 
   ionViewDidLoad() {

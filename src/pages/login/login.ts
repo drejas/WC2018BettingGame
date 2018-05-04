@@ -9,16 +9,16 @@ import { HomePage } from '../home/home';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
+
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
+
+  // login object
   account: { email: string, password: string } = {
     email: '',
     password: ''
   };
 
-  // Our translated text strings
+  // Toast Strings
   private loginErrorString: string;
   private loginSuccessString: string;
   private loginRejectString: string;
@@ -31,43 +31,61 @@ export class LoginPage {
 
       this.loginErrorString = "Login Error";
       this.loginRejectString = "Login Reject";
-      this.loginSuccessString = "Login Success!!!";
+      this.loginSuccessString = "Login Success";
   }
 
-  // Attempt to login in through our User service
-  doLogin() {
+  // Attempt to login
+  login() {
+    // account data ready
+    console.log("Login request: ");
+    console.log(this.account);
     this.user.login(this.account).subscribe((resp) => {
-      this.app.getRootNav().setRoot(HomePage);
       if (resp['status'] == 'success') {
+        console.log('Login status: success');
+        // store login data
         this.storage.set('token', resp['token']);
         this.storage.set('email', resp['email']);
         this.storage.set('id', resp['id']);
-        // Able to sign up
+        // toast success
         let toast = this.toastCtrl.create({
           message: this.loginSuccessString,
           duration: 3000,
           position: 'bottom'
         });
         toast.present();
+        // go to HomePage
+        this.app.getRootNav().setRoot(HomePage);
       }
-      else if (resp['status'] == 'reject') {
-        // Able to sign up
+      else {
+        console.log('Login status: '+resp['status']);
+        // clear login data
+        this.storage.remove('token');
+        this.storage.remove('email');
+        this.storage.remove('id');
+        // toast reject
         let toast = this.toastCtrl.create({
           message: this.loginRejectString,
           duration: 3000,
           position: 'bottom'
         });
         toast.present();
+        // stay at WelcomePage
       }
     }, (err) => {
-      this.app.getRootNav().setRoot(HomePage);
-      // Unable to log in
+      console.log('Login status: error');
+      // Toast error
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
       toast.present();
+      // stay at WelcomePage
     });
+  }
+
+  // onPageLoad
+  ionViewDidLoad() {
+    console.log('LoginPage loaded');
   }
 }

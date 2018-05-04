@@ -1,0 +1,36 @@
+<!--
+  Generated template for the GameStandingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>GameStandings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h3>{{ game.title }}</h3>
+  <ion-list>
+    <div ion-item style="width:100%;font-weight: bold;">
+      <div style="float:left;width:2%;text-align:left;">#</div>
+      <div style="float:left;width:10%;text-align:center;">&nbsp;</div>
+      <div style="float:left;width:60%;text-align:left;">Nickname</div>
+      <div style="float:left;width:14%;text-align:left;">3pts</div>
+      <div style="float:left;width:14%;text-align:left;">Pts</div>
+    </div>
+    <div ion-item style="width:100%" *ngFor="let p of places">
+      <div style="float:left;width:2%;text-align:left;">{{ p.position }}</div>
+      <div style="float:left;width:10%;text-align:center;"><img src="{{ p.avatar }}"/></div>
+      <div style="float:left;width:60%;text-align:left;">{{ p.nickname }}</div>
+      <div style="float:left;width:14%;text-align:left;">{{ p.pts3 }}</div>
+      <div style="float:left;width:14%;text-align:left;">{{ p.pts }}</div>
+    </div>
+  </ion-list>
+
+</ion-content>
